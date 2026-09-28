@@ -668,10 +668,10 @@ const audioFiles = { click: null, success: null, error: null, bgm: null };
 function initAudio() {
     if (audioConfig.audioInitialized) return;
     try {
-        audioFiles.click = new Audio('assets/audio/sfx/click.mp3');
-        audioFiles.success = new Audio('assets/audio/sfx/success.mp3');
-        audioFiles.error = new Audio('assets/audio/sfx/error.mp3');
-        audioFiles.bgm = new Audio('assets/audio/bgm/ambient.mp3');
+        audioFiles.click = new Audio('assets/Audio/sfx/click.mp3');
+        audioFiles.success = new Audio('assets/Audio/sfx/success.mp3');
+        audioFiles.error = new Audio('assets/Audio/sfx/error.mp3');
+        audioFiles.bgm = new Audio('assets/Audio/bgm/ambient.mp3');
         audioFiles.bgm.loop = true;
         audioFiles.bgm.volume = 0.3;
         audioConfig.audioInitialized = true;
