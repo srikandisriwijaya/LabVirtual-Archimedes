@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Virtual: Hukum Archimedes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+
+<!-- SCENE 0: OPENING SCREEN - UPGRADE MEWAH & PROFESIONAL -->
+<div id="scene-opening" class="modal-overlay" style="z-index: 9999; background: linear-gradient(135deg, #0f3460 0%, #1a5c7a 50%, #1F6B3A 100%);">
+    <div class="card" style="max-width: 700px; text-align: center; padding: 60px 50px; border: none; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); box-shadow: 0 20px 60px rgba(0,0,0,0.3); width: 100%;">
+        
+        <!-- ILUSTRASI SVG MEWAH (KAPAL & JANGKAR) -->
+        <div style="margin-bottom: 30px;">
+            <svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                <!-- Kapal Mewah -->
+                <g transform="translate(10, 20)">
+                    <path d="M10 60 L20 40 L70 40 L80 60 Z" fill="#2F80ED" stroke="#1a5c7a" stroke-width="2"/>
+                    <rect x="25" y="25" width="40" height="15" fill="white" stroke="#2F80ED" stroke-width="2" rx="3"/>
+                    <rect x="30" y="30" width="8" height="8" fill="#EAF4FF"/>
+                    <rect x="42" y="30" width="8" height="8" fill="#EAF4FF"/>
+                    <rect x="54" y="30" width="8" height="8" fill="#EAF4FF"/>
+                    <path d="M5 60 Q45 70 85 60" fill="none" stroke="#2F80ED" stroke-width="3" stroke-linecap="round"/>
+                </g>
+                
+                <!-- Jangkar Elegan (Pengganti Paku Besi) -->
+                <g transform="translate(75, 30) scale(0.8)">
+                    <circle cx="20" cy="10" r="5" fill="#5D4037" stroke="#3E2723" stroke-width="2"/>
+                    <line x1="20" y1="15" x2="20" y2="60" stroke="#5D4037" stroke-width="4" stroke-linecap="round"/>
+                    <line x1="10" y1="30" x2="30" y2="30" stroke="#5D4037" stroke-width="3" stroke-linecap="round"/>
+                    <path d="M10 50 Q20 65 30 50" fill="none" stroke="#5D4037" stroke-width="3" stroke-linecap="round"/>
+                    <polygon points="8,48 12,48 10,55" fill="#5D4037"/>
+                    <polygon points="28,48 32,48 30,55" fill="#5D4037"/>
+                </g>
+            </svg>
+        </div>
+        
+        <!-- JUDUL UTAMA -->
+        <h1 style="color: var(--primary-green); font-size: 36px; margin-bottom: 10px; letter-spacing: 1px;">HUKUM ARCHIMEDES</h1>
+        <p style="font-size: 18px; color: var(--text-light); margin-bottom: 40px; font-weight: 500;">Gaya Apung dalam Kehidupan</p>
+        
+        <!-- STIMULUS RATA KANAN-KIRI (JUSTIFY) -->
+        <div style="background: var(--bg-light); padding: 30px; border-radius: 16px; margin-bottom: 40px; text-align: justify; line-height: 1.9; font-size: 16px; border-left: 5px solid var(--primary-blue);">
+            <p style="margin-bottom: 15px;"><strong>Pernahkah kamu berpikir...</strong></p>
+            <p style="margin-bottom: 15px;">Mengapa kapal raksasa yang terbuat dari logam dapat mengapung di laut, sedangkan paku besi kecil justru tenggelam?</p>
+            <p>Di laboratorium virtual ini, kamu akan menyelidiki bagaimana <strong>massa jenis</strong>, <strong>volume</strong>, <strong>gaya apung</strong>, dan <strong>gaya berat</strong> menentukan nasib sebuah benda di dalam fluida.</p>
+        </div>
+
+        <!-- TOMBOL MULAI EKSPLORASI -->
+        <button class="btn btn-green" style="font-size: 18px; padding: 18px 50px; border-radius: 12px; box-shadow: 0 8px 25px rgba(31, 107, 58, 0.4);" onclick="mulaiEksplorasi()">
+            Mulai Eksplorasi <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i>
+        </button>
+
+        <!-- IDENTITAS LAB VIRTUAL & DEVELOPER (PROFESIONAL) -->
+        <div style="margin-top: 50px; padding-top: 25px; border-top: 1px solid var(--border-color); color: var(--text-light); font-size: 13px; line-height: 1.8;">
+            <p style="margin-bottom: 8px; font-weight: 700; color: var(--primary-green); font-size: 14px; letter-spacing: 0.5px;">LABORATORIUM VIRTUAL HUKUM ARCHIMEDES</p>
+            <p style="margin-bottom: 5px; font-weight: 600;">Disusun oleh:</p>
+            <p style="font-weight: 500; color: var(--text-dark);">
+                Neysya Ditha Ramadhani (06111282328037)<br>
+                Rania Dwicahyani (06111282328042)<br>
+                Murnia (06111282328048)
+            </p>
+            <p style="margin-top: 10px; font-size: 12px; color: var(--text-light);">Universitas Sriwijaya (UNSRI) — Program Studi Pendidikan Fisika — 2026</p>
+        </div>
+    </div>
+</div>
+
+<!-- HEADER -->
+<header>
+    <div>
+        <h1>Hukum Archimedes</h1>
+        <small>Gaya Apung dalam Kehidupan</small>
+    </div>
+    <div style="display: flex; gap: 10px; align-items: center;">
+        <button id="btn-sfx" class="btn" style="background: rgba(255,255,255,0.2); font-size: 13px; padding: 8px 12px;" onclick="toggleSFX()">
+            <i class="fa-solid fa-volume-high"></i> SFX
+        </button>
+        <button id="btn-bgm" class="btn" style="background: rgba(255,255,255,0.2); font-size: 13px; padding: 8px 12px;" onclick="toggleBGM()">
+            <i class="fa-solid fa-music"></i> BGM
+        </button>
+        <button class="btn" style="background: rgba(255,255,255,0.2); font-size: 14px;" onclick="showScene('pengaturan')">
+            <i class="fa-solid fa-gear"></i> Pengaturan
+        </button>
+    </div>
+</header>
+
+<!-- NAVIGASI -->
+<nav>
+    <button class="nav-link active" onclick="showScene('beranda')"><i class="fa-solid fa-house"></i> Beranda</button>
+    <button class="nav-link" onclick="showScene('eksperimen')"><i class="fa-solid fa-flask-vial"></i> Eksperimen</button>
+    <button class="nav-link" onclick="showScene('grafik')"><i class="fa-solid fa-chart-line"></i> Grafik & Data</button>
+    <button class="nav-link" onclick="showScene('aktivitas')"><i class="fa-solid fa-trophy"></i> Aktivitas</button>
+    <button class="nav-link" onclick="showScene('evaluasi')"><i class="fa-solid fa-clipboard-check"></i> Evaluasi</button>
+</nav>
+
+<!-- SCENE 1: BERANDA -->
+<div id="beranda" class="scene active">
+    <div class="card" style="text-align: center; padding: 40px 20px;">
+        <h2 style="color: var(--primary-green); margin-bottom: 10px; font-size: 28px;">
+            Selamat Datang di Laboratorium Virtual Hukum Archimedes!
+        </h2>
+        <p style="font-size: 17px; color: #555; max-width: 750px; margin: 0 auto 30px auto; line-height: 1.7;">
+            "Eksplorasi bagaimana benda dapat terapung, melayang, atau tenggelam dengan mengubah massa, volume, massa jenis benda, dan jenis fluida."
+        </p>
+        
+        <!-- ILUSTRASI SVG BERANDA -->
+        <div style="margin: 30px auto; max-width: 550px;">
+            <svg viewBox="0 0 550 350" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; filter: drop-shadow(0 8px 16px rgba(0,0,0,0.1));">
+                <defs>
+                    <linearGradient id="waterGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#EAF4FF;stop-opacity:1" />
+                        <stop offset="50%" style="stop-color:#A8D4F5;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#4A90E2;stop-opacity:1" />
+                    </linearGradient>
+                    <linearGradient id="woodGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#D4A574;stop-opacity:1" />
+                        <stop offset="50%" style="stop-color:#A67C52;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#8B5A2B;stop-opacity:1" />
+                    </linearGradient>
+                    <linearGradient id="glassGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:rgba(255,255,255,0.9);stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:rgba(200,220,240,0.3);stop-opacity:1" />
+                    </linearGradient>
+                    <filter id="woodShadow"><feDropShadow dx="0" dy="3" stdDeviation="3" flood-opacity="0.3"/></filter>
+                    <filter id="arrowGlow"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                </defs>
+                
+                <rect x="100" y="60" width="380" height="240" fill="url(#glassGradient)" stroke="#2F80ED" stroke-width="4" rx="20" ry="20"/>
+                <rect x="104" y="130" width="372" height="166" fill="url(#waterGradient)" rx="15" ry="15"/>
+                
+                <path d="M 104 130 Q 150 125, 200 130 T 300 130 T 400 130 T 476 130" fill="none" stroke="#2F80ED" stroke-width="2.5" opacity="0.7">
+                    <animate attributeName="d" dur="3s" repeatCount="indefinite" values="M 104 130 Q 150 125, 200 130 T 300 130 T 400 130 T 476 130; M 104 130 Q 150 135, 200 130 T 300 130 T 400 130 T 476 130; M 104 130 Q 150 125, 200 130 T 300 130 T 400 130 T 476 130"/>
+                </path>
+                
+                <line x1="85" y1="296" x2="95" y2="296" stroke="#666" stroke-width="2"/>
+                <line x1="85" y1="213" x2="95" y2="213" stroke="#666" stroke-width="2"/>
+                <line x1="85" y1="130" x2="95" y2="130" stroke="#666" stroke-width="2"/>
+                <text x="55" y="300" fill="#555" font-size="13" font-weight="600" font-family="Poppins, Arial">0 L</text>
+                <text x="45" y="217" fill="#555" font-size="13" font-weight="600" font-family="Poppins, Arial">5 L</text>
+                <text x="35" y="134" fill="#555" font-size="13" font-weight="600" font-family="Poppins, Arial">10 L</text>
+                
+                <line x1="104" y1="296" x2="476" y2="296" stroke="#2F80ED" stroke-width="1" stroke-dasharray="3,3" opacity="0.3"/>
+                <line x1="104" y1="213" x2="476" y2="213" stroke="#2F80ED" stroke-width="1" stroke-dasharray="3,3" opacity="0.3"/>
+                <line x1="104" y1="130" x2="476" y2="130" stroke="#2F80ED" stroke-width="1" stroke-dasharray="3,3" opacity="0.3"/>
+                
+                <g filter="url(#woodShadow)">
+                    <rect x="230" y="95" width="90" height="60" fill="url(#woodGradient)" rx="6" ry="6">
+                        <animate attributeName="y" dur="2.5s" repeatCount="indefinite" values="95;90;95" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1"/>
+                    </rect>
+                    <line x1="240" y1="108" x2="310" y2="108" stroke="#6B4423" stroke-width="1" opacity="0.4"/>
+                    <line x1="240" y1="120" x2="310" y2="120" stroke="#6B4423" stroke-width="1" opacity="0.4"/>
+                    <line x1="240" y1="132" x2="310" y2="132" stroke="#6B4423" stroke-width="1" opacity="0.4"/>
+                    <line x1="240" y1="144" x2="310" y2="144" stroke="#6B4423" stroke-width="1" opacity="0.4"/>
+                    <rect x="235" y="100" width="80" height="8" fill="rgba(255,255,255,0.2)" rx="3"/>
+                </g>
+                
+                <g filter="url(#arrowGlow)">
+                    <line x1="275" y1="95" x2="275" y2="30" stroke="#2E7D32" stroke-width="5" stroke-linecap="round"/>
+                    <polygon points="275,20 265,40 285,40" fill="#2E7D32"/>
+                    <text x="295" y="60" fill="#2E7D32" font-size="18" font-weight="bold" font-family="Poppins, Arial">Fa</text>
+                    <text x="320" y="60" fill="#2E7D32" font-size="16" font-family="Poppins, Arial">↑</text>
+                </g>
+                
+                <g filter="url(#arrowGlow)">
+                    <line x1="275" y1="155" x2="275" y2="220" stroke="#D32F2F" stroke-width="5" stroke-linecap="round"/>
+                    <polygon points="275,230 265,210 285,210" fill="#D32F2F"/>
+                    <text x="295" y="200" fill="#D32F2F" font-size="18" font-weight="bold" font-family="Poppins, Arial">W</text>
+                    <text x="315" y="200" fill="#D32F2F" font-size="16" font-family="Poppins, Arial">↓</text>
+                </g>
+                
+                <circle cx="420" cy="250" r="4" fill="white" opacity="0.7"><animate attributeName="cy" dur="4s" repeatCount="indefinite" values="280;140"/><animate attributeName="opacity" dur="4s" repeatCount="indefinite" values="0.7;0"/><animate attributeName="cx" dur="4s" repeatCount="indefinite" values="420;425;420"/></circle>
+                <circle cx="440" cy="260" r="3" fill="white" opacity="0.6"><animate attributeName="cy" dur="5s" repeatCount="indefinite" values="290;140"/><animate attributeName="opacity" dur="5s" repeatCount="indefinite" values="0.6;0"/></circle>
+                <circle cx="150" cy="240" r="3.5" fill="white" opacity="0.6"><animate attributeName="cy" dur="4.5s" repeatCount="indefinite" values="280;140"/><animate attributeName="opacity" dur="4.5s" repeatCount="indefinite" values="0.6;0"/><animate attributeName="cx" dur="4.5s" repeatCount="indefinite" values="150;145;150"/></circle>
+                <circle cx="180" cy="270" r="2.5" fill="white" opacity="0.5"><animate attributeName="cy" dur="6s" repeatCount="indefinite" values="290;140"/><animate attributeName="opacity" dur="6s" repeatCount="indefinite" values="0.5;0"/></circle>
+                
+                <text x="490" y="200" fill="#2F80ED" font-size="11" font-weight="600" font-family="Poppins, Arial" writing-mode="tb">V_terdesak</text>
+                <g transform="translate(495, 220)">
+                    <rect x="0" y="0" width="20" height="30" fill="none" stroke="#2F80ED" stroke-width="1.5" rx="2"/>
+                    <rect x="2" y="15" width="16" height="13" fill="#2F80ED" opacity="0.3" rx="1"/>
+                    <line x1="5" y1="8" x2="15" y2="8" stroke="#2F80ED" stroke-width="1"/>
+                    <line x1="5" y1="15" x2="15" y2="15" stroke="#2F80ED" stroke-width="1"/>
+                    <line x1="5" y1="22" x2="15" y2="22" stroke="#2F80ED" stroke-width="1"/>
+                </g>
+            </svg>
+        </div>
+
+        <div class="card-grid">
+            <div class="card-item" onclick="showScene('eksperimen')"><div style="font-size: 45px; margin-bottom: 10px;"><i class="fa-solid fa-book-open" style="color: var(--primary-green);"></i></div><h3 style="color: var(--primary-green); margin-bottom: 8px;">01 — Pelajari</h3><p style="font-size: 14px; color: var(--text-light);">Pahami konsep dasar Hukum Archimedes.</p></div>
+            <div class="card-item" onclick="showScene('eksperimen')"><div style="font-size: 45px; margin-bottom: 10px;"><i class="fa-solid fa-flask-vial" style="color: var(--primary-green);"></i></div><h3 style="color: var(--primary-green); margin-bottom: 8px;">02 — Eksperimen</h3><p style="font-size: 14px; color: var(--text-light);">Ubah variabel dan amati perubahan gaya.</p></div>
+            <div class="card-item" onclick="showScene('aktivitas')"><div style="font-size: 45px; margin-bottom: 10px;"><i class="fa-solid fa-trophy" style="color: var(--primary-green);"></i></div><h3 style="color: var(--primary-green); margin-bottom: 8px;">03 — Tantang Dirimu</h3><p style="font-size: 14px; color: var(--text-light);">Selesaikan tantangan Boss Level.</p></div>
+        </div>
+        <button class="btn btn-green" style="margin-top: 35px; font-size: 17px; padding: 15px 40px;" onclick="showScene('eksperimen')">Mulai Eksplorasi <i class="fa-solid fa-arrow-right"></i></button>
+        <!-- FOOTER IDENTITAS DEVELOPER (DIPINDAH KE BERANDA) -->
+        <div style="margin-top: 50px; padding-top: 20px; border-top: 1px solid var(--border-color); color: var(--text-light); font-size: 12px;">
+            <p style="margin-bottom: 8px; font-weight: 600; color: var(--primary-green);">Laboratorium Virtual Hukum Archimedes</p>
+            <p style="margin-bottom: 5px;">Disusun oleh:</p>
+            <p style="font-weight: 500; line-height: 1.6;">
+                Neysya Ditha Ramadhani (06111282328037)<br>
+                Rania Dwicahyani (06111282328042)<br>
+                Murnia (06111282328048)
+            </p>
+            <p style="margin-top: 8px; font-size: 11px;">Universitas Sriwijaya (UNSRI) — Program Studi Pendidikan Fisika — 2026</p>
+        </div>
+    </div>
+</div>
+
+<!-- SCENE 3: EKSPERIMEN (STRUKTUR FINAL FIX) -->
+<div id="eksperimen" class="scene">
+    <div class="experiment-layout">
+        
+        <!-- PANEL KIRI: KONTROL EKSPERIMEN -->
+        <div class="card" id="panelBenda">
+            <h3 style="color: var(--primary-green); margin-bottom: 15px; font-size: 18px;"><i class="fa-solid fa-sliders"></i> Kontrol Eksperimen</h3>
+            
+            <h4 style="margin-top: 10px; margin-bottom: 10px; font-size: 15px;">1. Pilih Benda</h4>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px;">
+                <button class="btn" style="font-size: 12px; padding: 10px 8px;" onclick="pilihBenda('kayu')">Kayu (0,60)</button>
+                <button class="btn" style="font-size: 12px; padding: 10px 8px; background: #eee; color: #333;" onclick="pilihBenda('aluminium')">Aluminium (2,70)</button>
+                <button class="btn" style="font-size: 12px; padding: 10px 8px; background: #eee; color: #333;" onclick="pilihBenda('besi')">Besi (7,87)</button>
+                <button class="btn" style="font-size: 12px; padding: 10px 8px; background: #eee; color: #333;" onclick="pilihBenda('custom')">Custom</button>
+            </div>
+
+            <h4 style="margin-bottom: 5px; font-size: 15px;">2. Massa Benda</h4>
+            <input type="range" id="sliderMassa" min="0.1" max="1.0" step="0.05" value="0.30" oninput="hitungMassaJenis()" style="width: 100%; margin: 10px 0;">
+            <p id="nilaiMassa" style="text-align: center; font-weight: bold; color: var(--primary-blue); font-size: 16px;">Massa = 0,30 kg</p>
+
+            <h4 style="margin-top: 15px; margin-bottom: 5px; font-size: 15px;">3. Volume Benda</h4>
+            <input type="range" id="sliderVolume" min="0.1" max="1.0" step="0.05" value="0.40" oninput="hitungMassaJenis()" style="width: 100%; margin: 10px 0;">
+            <p id="nilaiVolume" style="text-align: center; font-weight: bold; color: var(--primary-blue); font-size: 16px;">Volume = 0,40 L</p>
+
+            <div class="card" style="background: var(--bg-light); border: 1px solid #ddd; margin-top: 15px; padding: 15px;">
+                <p style="font-size: 13px; text-align: center; color: var(--text-light);">Massa Jenis Benda</p>
+                <p id="nilaiMassaJenis" style="font-size: 24px; text-align: center; color: var(--primary-green); font-weight: bold; margin-top: 5px;">0,75 kg/L</p>
+                <p id="rumusMassaJenis" style="font-size: 11px; text-align: center; color: var(--text-light); margin-top: 5px;">ρ = massa ÷ volume</p>
+            </div>
+
+            <h4 style="margin-top: 20px; margin-bottom: 5px; font-size: 15px;">4. Pilih Fluida</h4>
+            <select id="pilihanFluida" onchange="hitungMassaJenis()" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; margin-top: 5px;">
+                <option value="1.00">Air (ρ = 1,00 g/cm³)</option>
+                <option value="0.80">Minyak (ρ = 0,80 g/cm³)</option>
+                <option value="1.26">Gliserin (ρ = 1,26 g/cm³)</option>
+            </select>
+
+            <h4 style="margin-top: 20px; margin-bottom: 10px; font-size: 15px;">5. Opsi Visualisasi</h4>
+            <div style="font-size: 13px; line-height: 1.8;">
+                <label><input type="checkbox" checked> Tampilkan gaya</label><br>
+                <label><input type="checkbox" checked> Tampilkan vektor gaya</label><br>
+                <label><input type="checkbox" checked> Tampilkan nilai numerik</label><br>
+                <label><input type="checkbox"> Tampilkan volume fluida</label>
+            </div>
+
+            <div style="margin-top: 25px; display: flex; gap: 10px;">
+                <button id="btnMulai" class="btn btn-green" style="flex: 1; font-size: 14px;"><i class="fa-solid fa-play"></i> Mulai</button>
+                <button id="btnJeda" class="btn" style="flex: 1; font-size: 14px; background: #f39c12; color: white;"><i class="fa-solid fa-pause"></i> Jeda</button>
+                <button id="btnReset" class="btn btn-gray" style="flex: 1; font-size: 14px;" onclick="resetSimulasi()"><i class="fa-solid fa-rotate-right"></i> Reset</button>
+            </div>
+        </div> 
+        <!-- AKHIR PANEL KIRI -->
+
+        <!-- PANEL TENGAH: VISUALISASI & PHET -->
+        <div class="card" style="text-align: center; padding: 15px;">
+            <h3 style="color: var(--primary-green); margin-bottom: 10px;">Simulasi Hukum Archimedes</h3>
+            <div style="background: var(--info-blue); padding: 12px; border-radius: 8px; margin-bottom: 15px; color: var(--primary-blue); font-size: 14px; text-align: left;">
+                <i class="fa-solid fa-circle-info"></i> "Atur benda dan fluida, kemudian amati gaya yang bekerja pada benda."
+            </div>
+            
+           <!-- CANVAS SIMULASI BUATAN SENDIRI (MENGGANTIKAN IFRAME PHET) -->
+<canvas id="simCanvas" width="600" height="450" style="border: 2px solid #ddd; border-radius: 12px; background: white; display: block; width: 100%;"></canvas>          
+        </div>
+        <!-- AKHIR PANEL TENGAH -->
+
+        <!-- PANEL KANAN: MATERI & HASIL -->
+        <div>
+            <div class="card" style="border-left: 4px solid var(--primary-blue);">
+                <h3 style="font-size: 17px; margin-bottom: 10px; color: var(--primary-green);"><i class="fa-solid fa-book"></i> Materi Singkat</h3>
+                <p style="font-size: 14px; margin-bottom: 12px;">"Benda yang dicelupkan ke dalam fluida mengalami gaya ke atas yang disebut <strong>gaya apung</strong>."</p>
+                
+                <div style="background: var(--bg-light); padding: 12px; border-radius: 8px; text-align: center; margin-bottom: 12px;">
+                    <p style="font-size: 16px; font-weight: bold; color: var(--primary-blue);">Fa = ρf × g × V<sub>terdesak</sub></p>
+                </div>
+                
+                <p style="font-size: 12px; color: var(--text-light); margin-bottom: 8px;">Klik istilah untuk memahami:</p>
+                <div style="display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 15px;">
+                    <span class="istilah-klik" data-istilah="Fa">Fa</span>
+                    <span class="istilah-klik" data-istilah="rho">ρf</span>
+                    <span class="istilah-klik" data-istilah="g">g</span>
+                    <span class="istilah-klik" data-istilah="Vterdesak">V<sub>terdesak</sub></span>
+                </div>
+
+                <div style="display: grid; gap: 8px;">
+                    <div class="status-box status-terapung"><h4 style="font-size: 14px; margin-bottom: 3px;">TERAPUNG</h4><p style="font-size: 12px;">Fa > W</p></div>
+                    <div class="status-box status-melayang"><h4 style="font-size: 14px; margin-bottom: 3px;">MELAYANG</h4><p style="font-size: 12px;">Fa = W</p></div>
+                    <div class="status-box status-tenggelam"><h4 style="font-size: 14px; margin-bottom: 3px;">TENGGELAM</h4><p style="font-size: 12px;">Fa < W</p></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 style="color: var(--primary-green); margin-bottom: 15px; font-size: 17px;"><i class="fa-solid fa-clipboard-list"></i> Hasil Pengamatan</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 14px; margin-bottom: 15px;">
+                    <div>Gaya Apung (Fa):</div><div id="displayFa" style="font-weight: bold; color: var(--primary-blue);">0,00 N ↑</div>
+                    <div>Gaya Berat (W):</div><div id="displayW" style="font-weight: bold; color: var(--status-tenggelam);">0,00 N ↓</div>
+                    <div>Volume Tercelup:</div><div id="displayVTerdesak" style="font-weight: bold;">0,00 L</div>
+                    <div>Massa Jenis Benda:</div><div id="displayRhoBenda" style="font-weight: bold;">0,00 kg/L</div>
+                    <div>Massa Jenis Fluida:</div><div id="displayRhoFluida" style="font-weight: bold;">1,00 kg/L</div>
+                </div>
+
+                <div id="kotakStatus" class="status-box status-melayang">
+                    <h4 id="judulStatus" style="font-size: 18px; margin-bottom: 5px;">MELAYANG</h4>
+                    <p id="rumusStatus" style="font-size: 14px; font-weight: bold; margin-bottom: 8px;">Fa = W</p>
+                    <p id="penjelasanStatus" style="font-size: 12px; color: var(--text-light);">Gaya apung sama dengan gaya berat sehingga benda seimbang.</p>
+                </div>
+
+                <button class="btn" style="width: 100%; margin-top: 10px; background: var(--primary-blue);" onclick="tampilkanMengapa()"><i class="fa-solid fa-lightbulb"></i> Mengapa?</button>
+                <button class="btn btn-green" style="width: 100%; margin-top: 10px;" onclick="tambahKeTabel()"><i class="fa-solid fa-plus"></i> Tambah ke Tabel Data</button>
+            </div>
+        </div>
+        <!-- AKHIR PANEL KANAN -->
+
+    </div>
+</div>
+
+<!-- SCENE: GRAFIK & DATA (STRUKTUR FINAL: IDENTITAS DI ATAS, ANALISIS DI BAWAH GRAFIK) -->
+<div id="grafik" class="scene">
+    
+    <!-- BAGIAN 1: TABEL DATA + IDENTITAS PRAKTIKAN (DI ATAS) -->
+    <div class="card" style="margin-bottom: 25px;">
+        <h2 style="color: var(--primary-green); margin-bottom: 15px; font-size: 22px;">
+            <i class="fa-solid fa-table"></i> Data Hasil Eksperimen
+        </h2>
+        
+        <!-- FORM IDENTITAS PRAKTIKAN SAJA -->
+        <div style="background: var(--bg-light); padding: 20px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid var(--primary-green);">
+            <h3 style="color: var(--primary-green); margin-bottom: 15px; font-size: 16px;">
+                <i class="fa-solid fa-user-pen"></i> Identitas Praktikan
+            </h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                <div>
+                    <label style="font-size: 13px; font-weight: 600; color: var(--text-dark); display: block; margin-bottom: 5px;">Nama Lengkap</label>
+                    <input type="text" id="inputNama" placeholder="Masukkan nama lengkap" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Inter', sans-serif;">
+                </div>
+                <div>
+                    <label style="font-size: 13px; font-weight: 600; color: var(--text-dark); display: block; margin-bottom: 5px;">NIM / No. Absen</label>
+                    <input type="text" id="inputNim" placeholder="Contoh: 0611128..." style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Inter', sans-serif;">
+                </div>
+                <div>
+                    <label style="font-size: 13px; font-weight: 600; color: var(--text-dark); display: block; margin-bottom: 5px;">Kelas / Kelompok</label>
+                    <input type="text" id="inputKelas" placeholder="Contoh: Fisika A - Kel 3" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Inter', sans-serif;">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tombol Aksi -->
+        <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+            <button class="btn btn-green" onclick="tambahKeTabel()" style="font-size: 14px; padding: 10px 18px;">
+                <i class="fa-solid fa-plus"></i> Tambahkan Data
+            </button>
+            <button class="btn btn-gray" onclick="hapusSemuaData()" style="font-size: 14px; padding: 10px 18px;">
+                <i class="fa-solid fa-rotate-right"></i> Reset Data
+            </button>
+            <button class="btn" onclick="exportCSV()" style="font-size: 14px; padding: 10px 18px; background: var(--primary-blue); color: white;">
+                <i class="fa-solid fa-file-csv"></i> Export CSV
+            </button>
+        </div>
+
+        <!-- Tabel -->
+        <div style="overflow-x: auto;">
+            <table id="tabelData">
+                <thead>
+                    <tr>
+                        <th style="width: 50px;">No</th>
+                        <th>Volume Tercelup (L)</th>
+                        <th>Gaya Apung Fa (N)</th>
+                        <th>Gaya Berat W (N)</th>
+                        <th>Kondisi</th>
+                        <th style="width: 80px;">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="tabelBody"></tbody>
+            </table>
+        </div>
+        
+        <!-- Pesan Kosong -->
+        <div id="pesanKosong" style="text-align: center; padding: 40px 20px; color: var(--text-light);">
+            <p style="font-size: 40px; margin-bottom: 10px;"><i class="fa-solid fa-clipboard"></i></p>
+            <p>Belum ada data eksperimen. Lakukan eksperimen lalu klik "Tambah ke Tabel Data".</p>
+        </div>
+    </div>
+
+    <!-- BAGIAN 2: GRAFIK HUBUNGAN FA VS VOLUME (DI TENGAH) -->
+    <div class="card" style="margin-bottom: 25px;">
+        <h2 style="color: var(--primary-green); margin-bottom: 15px; font-size: 22px;">
+            <i class="fa-solid fa-chart-line"></i> Hubungan Gaya Apung dan Volume Tercelup
+        </h2>
+        
+        <!-- Canvas Grafik -->
+        <div style="background: white; padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 20px;">
+            <canvas id="grafikArchimedes" style="max-height: 400px;"></canvas>
+        </div>
+        
+        <!-- Kesimpulan Otomatis -->
+        <div id="kesimpulanGrafik" class="card" style="background: var(--info-blue); border-left: 4px solid var(--primary-blue); display: none; margin-top: 0;">
+            <h3 style="color: var(--primary-blue); margin-bottom: 10px; font-size: 16px;">💡 Kesimpulan dari Grafik</h3>
+            <p id="isiKesimpulanGrafik" style="font-size: 14px; line-height: 1.7;">Kesimpulan akan muncul setelah kamu menambahkan minimal 3 data.</p>
+        </div>
+    </div>
+
+    <!-- BAGIAN 3: ANALISIS DATA TERSTRUKTUR (DI BAWAH GRAFIK) -->
+    <div class="card">
+        <h2 style="color: var(--primary-green); margin-bottom: 15px; font-size: 22px;">
+            <i class="fa-solid fa-pen-to-square"></i> Analisis Data & Jawaban Pertanyaan
+        </h2>
+        
+        <div style="margin-top: 20px;">
+            <label style="font-size: 14px; font-weight: 600; color: var(--text-dark); display: block; margin-bottom: 8px;">
+                1. Observasi Hubungan Fa vs Volume Tercelup
+            </label>
+            <textarea id="inputObservasi" rows="3" placeholder="Berdasarkan tabel dan grafik di atas, bagaimana hubungan antara Volume Tercelup dengan Gaya Apung? Jelaskan!" 
+                style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Inter', sans-serif; resize: vertical; line-height: 1.6;"></textarea>
+        </div>
+
+        <div style="margin-top: 15px;">
+            <label style="font-size: 14px; font-weight: 600; color: var(--text-dark); display: block; margin-bottom: 8px;">
+                2. Verifikasi Rumus & Error Analysis
+            </label>
+            <textarea id="inputVerifikasi" rows="3" placeholder="Pilih satu baris data. Hitung Fa teoritis (Fa = ρf × g × Vterdesak). Apakah sama dengan data eksperimen? Jika beda, mengapa?" 
+                style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Inter', sans-serif; resize: vertical; line-height: 1.6;"></textarea>
+        </div>
+
+        <div style="margin-top: 15px;">
+            <label style="font-size: 14px; font-weight: 600; color: var(--text-dark); display: block; margin-bottom: 8px;">
+                3. Kesimpulan Hukum Archimedes
+            </label>
+            <textarea id="inputKesimpulan" rows="3" placeholder="Tuliskan kesimpulanmu mengenai Hukum Archimedes berdasarkan percobaan ini!" 
+                style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Inter', sans-serif; resize: vertical; line-height: 1.6;"></textarea>
+        </div>
+    <!-- TOMBOL EXPORT FINAL (DI PALING BAWAH SETELAH ANALISIS) -->
+<div style="margin-top: 30px; text-align: center; padding-top: 20px; border-top: 1px solid var(--border-color);">
+    <p style="font-size: 14px; color: var(--text-light); margin-bottom: 15px;">
+        Pastikan semua data dan analisis sudah lengkap sebelum mengunduh laporan.
+    </p>
+    <button class="btn" onclick="exportPDF()" style="font-size: 16px; padding: 15px 40px; background: #D32F2F; color: white; border-radius: 12px; box-shadow: 0 8px 25px rgba(211, 47, 47, 0.3);">
+        <i class="fa-solid fa-file-pdf" style="margin-right: 8px;"></i> Unduh Laporan Lengkap (PDF)
+    </button>
+</div>
+    </div>
+
+</div>
+
+<!-- SCENE: AKTIVITAS (BOSS LEVEL) - STRUKTUR FINAL -->
+<div id="aktivitas" class="scene">
+    
+    <!-- 1. HEADER JUDUL UTAMA (DI ATAS SEKARANG) -->
+    <div class="card" style="text-align: center; padding: 30px 20px; background: linear-gradient(135deg, #1F6B3A, #2F80ED); color: white; margin-bottom: 25px;">
+        <h2 style="font-size: 28px; margin-bottom: 8px;"><i class="fa-solid fa-trophy"></i> Tantangan Archimedes</h2>
+        <p style="font-size: 15px; opacity: 0.9; max-width: 600px; margin: 0 auto 15px auto;">
+            Buktikan kemampuanmu! Atur variabel eksperimen untuk mencapai kondisi yang diminta.
+        </p>
+        <div style="display: inline-block; background: rgba(255,255,255,0.2); padding: 8px 20px; border-radius: 20px; font-size: 14px;">
+             Total Poin: <strong id="totalPoinBoss">0</strong> / 150
+        </div>
+    </div>
+
+        <!-- 3. PETUNJUK UMUM (DIPINDAH KE BAWAH SEKARANG) -->
+    <div class="card" style="margin-top: 25px; border-left: 4px solid var(--primary-blue); background: linear-gradient(to right, #EAF4FF, #ffffff);">
+        <h3 style="color: var(--primary-blue); margin-bottom: 10px; font-size: 18px;">
+            <i class="fa-solid fa-circle-info"></i> Petunjuk Umum Boss Level
+        </h3>
+        <p style="font-size: 14px; line-height: 1.8; color: var(--text-dark); margin-bottom: 10px;">
+            Selesaikan tantangan berikut untuk membuktikan pemahamanmu tentang Hukum Archimedes!
+        </p>
+        <ol style="font-size: 14px; line-height: 1.8; color: var(--text-dark); padding-left: 20px;">
+            <li>Buka halaman <strong>Eksperimen</strong> untuk mengatur variabel (Massa, Volume, Fluida).</li>
+            <li>Atur variabel hingga memenuhi <strong>syarat kondisi</strong> yang diminta.</li>
+            <li>Kembali ke halaman ini dan klik tombol <strong>"Cek Jawaban"</strong>.</li>
+            <li>Tantangan berikutnya akan terbuka otomatis setelah tantangan sebelumnya selesai.</li>
+        </ol>
+    </div>
+
+    <!-- 2. CONTAINER DAFTAR TANTANGAN (DIISI OLEH JS) -->
+    <div id="bossLevelContainer" style="margin-top: 20px;"></div>
+
+
+
+    <!-- 4. FOOTER IDENTITAS DEVELOPER -->
+    <div style="text-align: center; margin-top: 40px; padding: 20px; border-top: 1px solid var(--border-color); color: var(--text-light); font-size: 12px;">
+        <p style="margin-bottom: 5px; font-weight: 600; color: var(--primary-green);">Laboratorium Virtual Hukum Archimedes</p>
+        <p>Disusun oleh:</p>
+        <p style="font-weight: 500;">
+            Neysya Ditha Ramadhani (06111282328037)<br>
+            Rania Dwicahyani (06111282328042)<br>
+            Murnia (06111282328048)
+        </p>
+        <p style="margin-top: 5px;">Universitas Sriwijaya (UNSRI) — Program Studi Pendidikan Fisika — 2026</p>
+    </div>
+
+</div>
+
+<!-- SCENE: EVALUASI -->
+<div id="evaluasi" class="scene">
+    <div class="card">
+        <h2 style="color: var(--primary-green); margin-bottom: 10px;"><i class="fa-solid fa-clipboard-check"></i> Uji Pemahamanmu</h2>
+        <p style="color: var(--text-light); margin-bottom: 20px;">Jawablah 10 soal berikut. Setiap jawaban benar bernilai <strong>10 poin</strong>.</p>
+        <div style="background: var(--bg-light); border-radius: 10px; padding: 5px; margin-bottom: 25px;"><div id="progressBar" style="background: var(--primary-blue); height: 10px; border-radius: 10px; width: 0%; transition: width 0.3s;"></div></div>
+        <p id="progressText" style="text-align: center; color: var(--text-light); font-size: 13px; margin-bottom: 20px;">Soal terjawab: 0 / 10</p>
+        <div id="quizContainer"></div>
+        <div style="text-align: center; margin-top: 30px;">
+            <button id="btnSubmitQuiz" class="btn btn-green" style="font-size: 16px; padding: 14px 40px;" onclick="submitQuiz()"><i class="fa-solid fa-paper-plane"></i> Cek Jawaban Saya</button>
+        </div>
+    </div>
+    <div id="hasilEvaluasi" class="card" style="display: none; margin-top: 20px;">
+        <h2 style="color: var(--primary-green); margin-bottom: 15px; text-align: center;"><i class="fa-solid fa-graduation-cap"></i> Eksperimen Selesai!</h2>
+        <div style="text-align: center; padding: 30px; background: var(--info-blue); border-radius: 12px; margin-bottom: 20px;">
+            <p style="font-size: 16px; color: var(--text-light); margin-bottom: 5px;">Skor Kamu</p>
+            <p id="skorAkhir" style="font-size: 56px; font-weight: bold; color: var(--primary-green); margin: 10px 0;">0/100</p>
+            <p id="kategoriSkor" style="font-size: 18px; font-weight: 600; color: var(--primary-blue);">-</p>
+        </div>
+        <h3 style="color: var(--primary-green); margin-bottom: 15px;"><i class="fa-solid fa-chart-pie"></i> Analisis Kompetensi</h3>
+        <div id="analisisKompetensi" style="display: grid; gap: 10px; margin-bottom: 20px;"></div>
+        <div style="display: flex; gap: 10px; margin-top: 25px; flex-wrap: wrap;">
+            <button class="btn" style="flex: 1; min-width: 200px;" onclick="ulangiEvaluasi()"><i class="fa-solid fa-rotate-right"></i> Ulangi Evaluasi</button>
+            <button class="btn btn-green" style="flex: 1; min-width: 200px;" onclick="showScene('eksperimen')"><i class="fa-solid fa-flask-vial"></i> Kembali ke Eksperimen</button>
+        </div>
+    </div>
+</div>
+
+<!-- SCENE: PENGATURAN -->
+<div id="pengaturan" class="scene">
+    <div class="card">
+        <h2 style="color: var(--primary-green); margin-bottom: 20px;"><i class="fa-solid fa-gear"></i> Pengaturan & Aksesibilitas</h2>
+        <div style="margin-bottom: 25px;">
+            <h3 style="margin-bottom: 10px; font-size: 16px;"><i class="fa-solid fa-volume-high"></i> Audio</h3>
+            <div style="display: grid; gap: 10px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: var(--bg-light); border-radius: 8px;">
+                    <div><strong>Sound Effects (SFX)</strong><p style="font-size: 12px; color: var(--text-light); margin:0;">Suara klik & interaksi</p></div>
+                    <button id="btn-sfx-setting" class="btn" style="font-size: 12px; padding: 6px 12px;" onclick="toggleSFX()"><i class="fa-solid fa-volume-high"></i> ON</button>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: var(--bg-light); border-radius: 8px;">
+                    <div><strong>Background Music (BGM)</strong><p style="font-size: 12px; color: var(--text-light); margin:0;">Musik latar eksperimen</p></div>
+                    <button id="btn-bgm-setting" class="btn" style="font-size: 12px; padding: 6px 12px;" onclick="toggleBGM()"><i class="fa-solid fa-music"></i> OFF</button>
+                </div>
+            </div>
+        </div>
+        <div style="margin-bottom: 25px;">
+            <h3 style="margin-bottom: 10px; font-size: 16px;"><i class="fa-solid fa-desktop"></i> Tampilan & Aksesibilitas</h3>
+            <div style="padding: 12px; background: var(--bg-light); border-radius: 8px; margin-bottom: 10px;">
+                <strong style="display:block; margin-bottom:8px;">Ukuran Teks</strong>
+                <div style="display: flex; gap: 8px;">
+                    <button class="btn" id="btn-text-normal" style="flex:1; font-size:12px; padding:8px;" onclick="setUkuranTeks('normal')">Normal</button>
+                    <button class="btn" id="btn-text-besar" style="flex:1; font-size:12px; padding:8px; background:#6c757d;" onclick="setUkuranTeks('besar')">Besar</button>
+                    <button class="btn" id="btn-text-sangat-besar" style="flex:1; font-size:12px; padding:8px; background:#6c757d;" onclick="setUkuranTeks('sangat-besar')">Sangat Besar</button>
+                </div>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: var(--bg-light); border-radius: 8px; margin-bottom: 10px;">
+                <div><strong><i class="fa-solid fa-moon"></i> Mode Gelap</strong><p style="font-size: 12px; color: var(--text-light); margin:0;">Tampilan gelap untuk kenyamanan mata</p></div>
+                <label style="position: relative; display: inline-block; width: 50px; height: 26px; cursor: pointer;">
+                    <input type="checkbox" id="toggle-dark-mode" style="opacity: 0; width: 0; height: 0;" onchange="toggleDarkMode()">
+                    <span style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 26px;"></span>
+                    <span style="position: absolute; content: ''; height: 20px; width: 20px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%;"></span>
+                </label>
+            </div>
+            <div style="padding: 12px; background: var(--bg-light); border-radius: 8px;">
+                <strong style="display:block; margin-bottom:8px;"><i class="fa-solid fa-language"></i> Bahasa</strong>
+                <div style="display: flex; gap: 8px;">
+                    <button class="btn" id="btn-lang-id" style="flex:1; font-size:12px; padding:8px;" onclick="setBahasa('id')">Bahasa Indonesia</button>
+                    <button class="btn" id="btn-lang-en" style="flex:1; font-size:12px; padding:8px; background:#6c757d;" onclick="setBahasa('en')">English</button>
+                </div>
+            </div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px;">
+            <button class="btn" style="background: var(--primary-blue); padding: 15px;" onclick="tampilkanBantuan()"><i class="fa-solid fa-circle-question"></i> Bantuan / Tutorial</button>
+            <button class="btn" style="background: #ffc107; color: #000; padding: 15px;" onclick="resetSimulasi()"><i class="fa-solid fa-rotate-right"></i> Reset Simulasi</button>
+        </div>
+        <button class="btn btn-green" style="width: 100%; padding: 12px;" onclick="showScene('beranda')"><i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda</button>
+    </div>
+</div>
+
+<!-- MODAL: MENGAPA? -->
+<div id="modalMengapa" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+        <button class="modal-close" onclick="tutupMengapa()">✕</button>
+        <h2 id="modalJudul" style="color: var(--primary-green); margin-bottom: 15px; font-size: 22px;">💡 Mengapa Benda MELAYANG?</h2>
+        <hr style="border: none; border-top: 2px solid var(--bg-light); margin-bottom: 20px;">
+        <div id="modalIsi" style="font-size: 15px; line-height: 1.7; color: var(--text-dark);">
+            <p style="margin-bottom: 15px;">Penjelasan akan muncul di sini.</p>
+            <div style="background: var(--info-blue); padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid var(--primary-blue);">
+                <p style="font-size: 14px; margin-bottom: 5px;"><strong>Hubungan Gaya:</strong></p>
+                <p id="modalRumus" style="font-size: 18px; font-weight: bold; color: var(--primary-blue); text-align: center;">Fa = W</p>
+            </div>
+            <div style="background: var(--bg-light); padding: 15px; border-radius: 8px; margin-top: 15px;">
+                <p style="font-size: 14px; margin-bottom: 8px;"><strong>Data Pengamatan:</strong></p>
+                <p id="modalData" style="font-size: 14px; line-height: 1.8;">• Massa jenis benda: 0,75 kg/L<br>• Massa jenis fluida: 1,00 kg/L<br>• Gaya apung (Fa): 2,94 N<br>• Gaya berat (W): 2,94 N</p>
+            </div>
+        </div>
+        <button class="btn btn-green" style="width: 100%; margin-top: 20px;" onclick="tutupMengapa()">✓ Mengerti, Tutup</button>
+    </div>
+</div>
+
+<!-- MODAL: BANTUAN -->
+<div id="modalBantuan" class="modal-overlay" style="display: none;">
+    <div class="modal-content" style="max-width: 600px;">
+        <button class="modal-close" onclick="tutupBantuan()">✕</button>
+        <h2 style="color: var(--primary-green); margin-bottom: 20px;"><i class="fa-solid fa-book-open"></i> Cara Menggunakan Lab Virtual</h2>
+        <div class="bantuan-step"><div class="step-number">1</div><div class="step-text"><strong>Pilih Benda & Fluida:</strong> Klik kartu benda di panel kiri, lalu pilih jenis fluida.</div></div>
+        <div class="bantuan-step"><div class="step-number">2</div><div class="step-text"><strong>Atur Variabel:</strong> Geser slider Massa dan Volume. Perhatikan perubahan Massa Jenis.</div></div>
+        <div class="bantuan-step"><div class="step-number">3</div><div class="step-text"><strong>Amati & Analisis:</strong> Lihat vektor gaya Fa dan W. Klik tombol <strong>"💡 Mengapa?"</strong> untuk penjelasan.</div></div>
+        <div class="bantuan-step"><div class="step-number">4</div><div class="step-text"><strong>Kumpulkan Data:</strong> Klik <strong>"+ Tambah ke Tabel Data"</strong>. Data akan masuk ke menu Grafik.</div></div>
+        <div class="bantuan-step"><div class="step-number">5</div><div class="step-text"><strong>Tantangan & Evaluasi:</strong> Selesaikan Boss Level, lalu kerjakan Evaluasi untuk melihat skor.</div></div>
+        <button class="btn btn-green" style="width: 100%; margin-top: 20px;" onclick="tutupBantuan()">✓ Mengerti, Mulai Eksperimen</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+<script src="audio.js"></script>
+</body>
+</html>

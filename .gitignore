@@ -1,0 +1,10 @@
+# Sistem Operasi Windows
+Thumbs.db
+desktop.ini
+*.log
+
+# Editor VS Code
+.vscode/
+
+# File Audio Besar (Opsional - hapus baris ini jika audio wajib di-upload)
+# assets/audio/*.mp3
