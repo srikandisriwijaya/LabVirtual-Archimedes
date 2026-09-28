@@ -20,19 +20,20 @@ const audioFiles = {
     bgm: null
 };
 
-// Inisialisasi audio
+// Inisialisasi audio - FIXED PATH & HAPUS HOVER YANG TIDAK ADA
 function initAudio() {
     if (audioConfig.audioInitialized) return;
     
     try {
-        // Load SFX
-        audioFiles.click = new Audio('assets/audio/sfx/click.mp3');
-        audioFiles.success = new Audio('assets/audio/sfx/success.mp3');
-        audioFiles.error = new Audio('assets/audio/sfx/error.mp3');
-        audioFiles.hover = new Audio('assets/audio/sfx/hover.mp3');
+        // Load SFX (Hanya 3 file yang tersedia)
+        audioFiles.click = new Audio('assets/Audio/sfx/click.mp3');
+        audioFiles.success = new Audio('assets/Audio/sfx/success.mp3');
+        audioFiles.error = new Audio('assets/Audio/sfx/error.mp3');
+        
+        // Hapus baris hover karena filenya tidak ada
         
         // Load BGM
-        audioFiles.bgm = new Audio('assets/audio/bgm/ambient.mp3');
+        audioFiles.bgm = new Audio('assets/Audio/bgm/ambient.mp3');
         audioFiles.bgm.loop = true;
         
         // Set volume
